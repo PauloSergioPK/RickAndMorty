@@ -4,7 +4,10 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
     id(libs.plugins.kotlin.cocoapods.get().pluginId)
+    id(libs.plugins.kotlin.serialization.get().pluginId)
     id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.jetbrains.compose.get().pluginId)
+    id(libs.plugins.compose.compiler.get().pluginId)
 }
 
 kotlin {
@@ -27,6 +30,8 @@ kotlin {
         framework {
             baseName = "app"
             isStatic = true
+
+            export(projects.core.designsystem)
         }
     }
 
@@ -34,10 +39,18 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            //put your multiplatform dependencies here
+            api(projects.core.designsystem)
+
+            api(libs.koin.core)
+            api(libs.koin.compose)
+
+            api(libs.navigation.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        androidMain.dependencies {
+            implementation(libs.koin.android)
         }
     }
 }

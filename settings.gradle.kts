@@ -17,3 +17,5 @@ dependencyResolutionManagement {
 rootProject.name = "RickAndMorty"
 include(":androidApp")
 include(":app")
+
+include(":core:designsystem")
