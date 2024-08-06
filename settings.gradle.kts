@@ -18,4 +18,5 @@ rootProject.name = "RickAndMorty"
 include(":androidApp")
 include(":app")
 
+include(":core:common:domain")
 include(":core:designsystem")
