@@ -15,8 +15,8 @@ private const val FEMALE = "Female"
 private const val GENDERLESS = "Genderless"
 
 fun CharacterResponse.toCharacter(
-    originLocation: Location,
-    lastKnownLocation: Location,
+    originLocation: Location?,
+    lastKnownLocation: Location?,
     episodes: List<Episode>
 ): Character {
     return Character(
