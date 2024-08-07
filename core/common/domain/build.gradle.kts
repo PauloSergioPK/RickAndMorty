@@ -34,12 +34,15 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.coroutines.core)
+            api(libs.coroutines.core)
 
-            implementation(libs.koin.core)
+            api(libs.koin.core)
 
-            implementation(libs.kotlin.datatime)
-            implementation(libs.kotlin.serialization)
+            api(libs.kotlin.datatime)
+            api(libs.kotlin.serialization)
+        }
+        androidMain.dependencies {
+            api(libs.koin.android)
         }
     }
 }

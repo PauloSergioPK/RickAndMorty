@@ -20,4 +20,8 @@ include(":app")
 
 include(":core:common:data")
 include(":core:common:domain")
+include(":core:common:presentation")
 include(":core:designsystem")
+
+include(":feature:home:presentation")
+include(":feature:splash:presentation")

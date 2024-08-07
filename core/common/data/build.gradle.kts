@@ -37,13 +37,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.common.domain)
 
-            implementation(libs.coroutines.core)
-
-            implementation(libs.koin.core)
-
-            implementation(libs.kotlin.datatime)
-            implementation(libs.kotlin.serialization)
-
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.client.encoding)
@@ -56,7 +49,7 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
         iosMain.dependencies {
-            api(libs.ktor.client.darwin)
+            implementation(libs.ktor.client.darwin)
         }
     }
 }

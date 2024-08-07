@@ -9,6 +9,7 @@ import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import com.psc.rickandmorty.app.presentation.model.Routes
 import com.psc.rickandmorty.app.presentation.ui.navigation.home.homeNavigation
+import com.psc.rickandmorty.app.presentation.ui.navigation.splash.splashNavigation
 import com.psc.rickandmorty.core.designsystem.theme.AppTheme
 import com.psc.rickandmorty.core.designsystem.util.getAsyncImageLoader
 import org.koin.compose.KoinContext
@@ -23,10 +24,11 @@ fun App() {
 
             NavHost(
                 navController = navController,
-                startDestination = Routes.HOME.name,
+                startDestination = Routes.SPLASH.name,
                 modifier = Modifier.fillMaxSize(),
             ) {
                 homeNavigation(navController)
+                splashNavigation(navController)
             }
         }
     }

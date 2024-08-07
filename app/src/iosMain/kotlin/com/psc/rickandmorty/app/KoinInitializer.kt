@@ -2,6 +2,7 @@ package com.psc.rickandmorty.app
 
 import com.psc.rickandmorty.core.common.data.di.commonDataModule
 import com.psc.rickandmorty.core.common.domain.di.commonDomainModule
+import com.psc.rickandmorty.feature.splash.presentation.di.splashPresentationModule
 import org.koin.core.context.startKoin
 
 actual class KoinInitializer {
@@ -10,7 +11,8 @@ actual class KoinInitializer {
             modules(
                 listOf(
                     commonDataModule,
-                    commonDomainModule
+                    commonDomainModule,
+                    splashPresentationModule
                 )
             )
         }
