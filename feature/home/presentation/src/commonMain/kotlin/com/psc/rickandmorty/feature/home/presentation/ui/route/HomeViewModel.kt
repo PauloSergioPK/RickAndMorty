@@ -20,25 +20,46 @@ class HomeViewModel(
     private val _uiEvent = Channel<HomeUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    private var page = 1
+    private var currentPage = 1
+    private var hasLoadedAllPages = false
 
     init {
-        fetchCharacters(page)
+        fetchCharacters(currentPage)
+    }
+
+    fun onEvent(event: HomeEvent) {
+        when(event) {
+            is HomeEvent.OnCharacterListEndReached -> {
+                fetchCharacters(currentPage)
+            }
+        }
     }
 
     private fun fetchCharacters(page: Int) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            if(!hasLoadedAllPages) {
+                _uiState.update { it.copy(isLoading = true) }
 
-            val result = getCharactersPageUseCase(page)
-            val pageCharacters = result.getOrNull() ?: listOf()
+                val result = getCharactersPageUseCase(page)
+                val pageCharacters = result.getOrNull() ?: listOf()
 
-            _uiState.update {
-                it.copy(
-                    characters = it.characters.toMutableList().plus(pageCharacters),
-                    isLoading = false
-                )
+                if(pageCharacters.size < PAGE_COUNT) {
+                    hasLoadedAllPages = true
+                }
+
+                currentPage++
+
+                _uiState.update {
+                    it.copy(
+                        characters = it.characters.toMutableList().plus(pageCharacters),
+                        isLoading = false
+                    )
+                }
             }
         }
+    }
+
+    private companion object {
+        const val PAGE_COUNT = 20
     }
 }
