@@ -25,7 +25,7 @@ kotlin {
         version = "1.0"
         ios.deploymentTarget = "16.0"
         framework {
-            baseName = "commonDomain"
+            baseName = "commonData"
             isStatic = true
         }
     }
@@ -34,18 +34,32 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            implementation(projects.core.common.domain)
+
             implementation(libs.coroutines.core)
 
             implementation(libs.koin.core)
 
             implementation(libs.kotlin.datatime)
             implementation(libs.kotlin.serialization)
+
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.client.encoding)
+            implementation(libs.ktor.client.logging)
+            implementation(libs.ktor.serialization.kotlinx.json)
+        }
+        androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
+        }
+        iosMain.dependencies {
+            api(libs.ktor.client.darwin)
         }
     }
 }
 
 android {
-    namespace = "com.psc.rickandmorty.core.common.domain"
+    namespace = "com.psc.rickandmorty.core.common.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

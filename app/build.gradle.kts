@@ -31,6 +31,8 @@ kotlin {
             baseName = "app"
             isStatic = true
 
+            export(projects.core.common.data)
+            export(projects.core.common.domain)
             export(projects.core.designsystem)
         }
     }
@@ -39,6 +41,8 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.core.common.data)
+            api(projects.core.common.domain)
             api(projects.core.designsystem)
 
             api(libs.koin.core)
