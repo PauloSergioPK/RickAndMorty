@@ -1,4 +1,4 @@
-package com.psc.rickandmorty.core.common.data.model
+package com.psc.rickandmorty.core.common.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,7 +16,4 @@ data class LocationResponse(
 
     @SerialName("dimension")
     val dimension: String,
-
-    @SerialName("residents")
-    val residentsUrls: List<String>,
 )

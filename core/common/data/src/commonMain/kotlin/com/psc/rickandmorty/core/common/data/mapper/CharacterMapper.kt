@@ -1,11 +1,11 @@
 package com.psc.rickandmorty.core.common.data.mapper
 
-import com.psc.rickandmorty.core.common.data.model.CharacterResponse
-import com.psc.rickandmorty.core.common.data.model.EpisodeResponse
-import com.psc.rickandmorty.core.common.data.model.LocationResponse
+import com.psc.rickandmorty.core.common.data.model.response.CharacterResponse
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.common.domain.model.CharacterGender
 import com.psc.rickandmorty.core.common.domain.model.CharacterStatus
+import com.psc.rickandmorty.core.common.domain.model.Episode
+import com.psc.rickandmorty.core.common.domain.model.Location
 
 private const val ALIVE = "Alive"
 private const val DEAD = "Dead"
@@ -15,9 +15,9 @@ private const val FEMALE = "Female"
 private const val GENDERLESS = "Genderless"
 
 fun CharacterResponse.toCharacter(
-    originLocationResponse: LocationResponse,
-    lastKnownLocationResponse: LocationResponse,
-    episodesResponses: List<EpisodeResponse>
+    originLocation: Location,
+    lastKnownLocation: Location,
+    episodes: List<Episode>
 ): Character {
     return Character(
         id = id,
@@ -26,10 +26,10 @@ fun CharacterResponse.toCharacter(
         species = species,
         type = type,
         gender = status.toCharacterGender(),
-        origin = originLocationResponse.toLocation(),
-        lastKnownLocation = lastKnownLocationResponse.toLocation(),
+        origin = originLocation,
+        lastKnownLocation = lastKnownLocation,
         image = image,
-        episodes = episodesResponses.map { it.toEpisode() },
+        episodes = episodes,
     )
 }
 

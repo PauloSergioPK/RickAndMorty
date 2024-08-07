@@ -1,4 +1,4 @@
-package com.psc.rickandmorty.core.common.data.model
+package com.psc.rickandmorty.core.common.data.model.response
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

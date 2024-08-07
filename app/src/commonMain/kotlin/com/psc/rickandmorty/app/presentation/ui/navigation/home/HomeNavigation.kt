@@ -22,15 +22,26 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.psc.rickandmorty.app.presentation.model.Routes
 import com.psc.rickandmorty.core.common.domain.model.Character
+import com.psc.rickandmorty.core.common.domain.usecase.FetchEpisodesUseCase
+import com.psc.rickandmorty.core.common.domain.usecase.FetchLocationsUseCase
 import com.psc.rickandmorty.core.common.domain.usecase.GetCharactersPageUseCase
+import kotlinx.coroutines.async
 import org.koin.compose.getKoin
 
 fun NavGraphBuilder.homeNavigation(navController: NavController) {
     composable(Routes.HOME.name) {
         val getCharactersPageUseCase = getKoin().get<GetCharactersPageUseCase>()
+        val fetchLocationsUseCase = getKoin().get<FetchLocationsUseCase>()
+        val fetchEpisodesUseCase = getKoin().get<FetchEpisodesUseCase>()
         var characters: SnapshotStateList<Character> = remember { mutableStateListOf() }
 
         LaunchedEffect(Unit) {
+            val fetch1 = async { fetchLocationsUseCase() }
+            val fetch2 = async { fetchEpisodesUseCase() }
+
+            println("===> locations ${fetch1.await()}")
+            println("===> episodes ${fetch2.await()}")
+
             val result = getCharactersPageUseCase.invoke(1)
             characters = result.getOrNull()?.toMutableStateList() ?: mutableStateListOf()
             println("===> $result")

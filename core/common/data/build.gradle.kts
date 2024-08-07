@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.cocoapods.get().pluginId)
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.serialization.get().pluginId)
+    id(libs.plugins.realm.get().pluginId)
 }
 
 kotlin {
@@ -48,6 +49,8 @@ kotlin {
             implementation(libs.ktor.client.encoding)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.serialization.kotlinx.json)
+
+            implementation(libs.realm)
         }
         androidMain.dependencies {
             implementation(libs.ktor.client.okhttp)

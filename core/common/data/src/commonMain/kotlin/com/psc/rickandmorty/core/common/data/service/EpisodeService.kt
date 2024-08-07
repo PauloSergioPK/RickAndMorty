@@ -1,7 +1,7 @@
 package com.psc.rickandmorty.core.common.data.service
 
-import com.psc.rickandmorty.core.common.data.model.EpisodeResponse
+import com.psc.rickandmorty.core.common.data.model.response.EpisodesPageResponse
 
 interface EpisodeService {
-    suspend fun getEpisode(episode: Int): EpisodeResponse
+    suspend fun getPage(page: Int): EpisodesPageResponse
 }

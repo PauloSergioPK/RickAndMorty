@@ -1,6 +1,6 @@
 package com.psc.rickandmorty.core.common.data.service
 
-import com.psc.rickandmorty.core.common.data.model.CharactersPageResponse
+import com.psc.rickandmorty.core.common.data.model.response.CharactersPageResponse
 import com.psc.rickandmorty.core.common.data.provider.HttpClientProvider
 import io.ktor.client.call.body
 import io.ktor.client.request.get
