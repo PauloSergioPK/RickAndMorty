@@ -3,6 +3,8 @@ package com.psc.rickandmorty.feature.home.presentation.ui.route
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.psc.rickandmorty.core.common.domain.usecase.GetCharactersPageUseCase
+import com.psc.rickandmorty.core.common.domain.util.Consts.FIRST_PAGE
+import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +22,7 @@ class HomeViewModel(
     private val _uiEvent = Channel<HomeUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    private var currentPage = 1
+    private var currentPage = FIRST_PAGE
     private var hasLoadedAllPages = false
 
     init {
@@ -28,7 +30,7 @@ class HomeViewModel(
     }
 
     fun onEvent(event: HomeEvent) {
-        when(event) {
+        when (event) {
             is HomeEvent.OnCharacterListEndReached -> {
                 fetchCharacters(currentPage)
             }
@@ -37,13 +39,13 @@ class HomeViewModel(
 
     private fun fetchCharacters(page: Int) {
         viewModelScope.launch {
-            if(!hasLoadedAllPages) {
+            if (!hasLoadedAllPages) {
                 _uiState.update { it.copy(isLoading = true) }
 
                 val result = getCharactersPageUseCase(page)
                 val pageCharacters = result.getOrNull() ?: listOf()
 
-                if(pageCharacters.size < PAGE_COUNT) {
+                if (pageCharacters.size < PAGE_SIZE) {
                     hasLoadedAllPages = true
                 }
 
@@ -57,9 +59,5 @@ class HomeViewModel(
                 }
             }
         }
-    }
-
-    private companion object {
-        const val PAGE_COUNT = 20
     }
 }

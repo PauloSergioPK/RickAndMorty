@@ -3,6 +3,8 @@ package com.psc.rickandmorty.core.common.data.datasource.remote
 import com.psc.rickandmorty.core.common.data.mapper.toEpisode
 import com.psc.rickandmorty.core.common.data.service.EpisodeService
 import com.psc.rickandmorty.core.common.domain.model.Episode
+import com.psc.rickandmorty.core.common.domain.util.Consts.FIRST_PAGE
+import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 
 internal class EpisodeRemoteDataSourceImpl(
     private val episodeService: EpisodeService
@@ -10,9 +12,9 @@ internal class EpisodeRemoteDataSourceImpl(
     override suspend fun getAllEpisodes(): List<Episode> {
         val allEpisodes = mutableListOf<Episode>()
         var currentPage = FIRST_PAGE
-        var currentPageItemsCount = PAGE_ITEMS_COUNT
+        var currentPageItemsCount = PAGE_SIZE
 
-        while (currentPageItemsCount == PAGE_ITEMS_COUNT) {
+        while (currentPageItemsCount == PAGE_SIZE) {
             val episodesPage = getEpisodesPage(currentPage)
             allEpisodes.addAll(episodesPage)
             currentPageItemsCount = episodesPage.size
@@ -24,11 +26,6 @@ internal class EpisodeRemoteDataSourceImpl(
 
     private suspend fun getEpisodesPage(page: Int): List<Episode> {
         return episodeService.getPage(page).results.map { it.toEpisode() }
-    }
-
-    private companion object {
-        const val FIRST_PAGE = 1
-        const val PAGE_ITEMS_COUNT = 20
     }
 
 }

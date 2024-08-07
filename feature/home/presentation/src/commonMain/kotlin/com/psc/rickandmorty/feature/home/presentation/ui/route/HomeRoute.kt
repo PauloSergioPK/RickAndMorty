@@ -8,9 +8,8 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import com.psc.rickandmorty.core.common.domain.model.Character
+import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import com.psc.rickandmorty.core.common.presentation.util.koinViewModel
-
-private const val REMAINING_CHARACTERS_TO_LOAD_NEXT_PAGE = 10
 
 @Composable
 fun HomeRoute(
@@ -26,7 +25,7 @@ fun HomeRoute(
             val lastDisplayedCharacterIndex = visibleItemsInfo.lastOrNull()?.index
 
             if (lastDisplayedCharacterIndex != null) {
-                lastDisplayedCharacterIndex >= currentCharactersCount - REMAINING_CHARACTERS_TO_LOAD_NEXT_PAGE
+                lastDisplayedCharacterIndex >= currentCharactersCount - (PAGE_SIZE/2)
             } else false
         }
     }
