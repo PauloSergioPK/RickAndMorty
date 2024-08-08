@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -33,7 +34,7 @@ internal fun CharacterCard(
     val strokeColor = Color.Black
     val strokeWidth = 2.dp
 
-    Column(
+    Box(
         modifier = modifier.then(
             Modifier.clip(shape)
                 .border(width = strokeWidth, color = strokeColor, shape = shape)
@@ -41,25 +42,33 @@ internal fun CharacterCard(
                 .padding(bottom = Dimens.defaultAlt)
         ),
     ) {
-        SubcomposeAsyncImage(
-            model = character.image,
-            contentDescription = null,
-            modifier = Modifier.height(170.dp).fillMaxWidth(),
-            contentScale = ContentScale.Crop,
-            loading = {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(shimmerBrush())
-                )
-            }
-        )
-        HorizontalDivider(color = strokeColor, thickness = strokeWidth)
-        VerticalSpacer(Dimens.small)
-        StrokedText(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = Dimens.smallAlt),
-            text = character.name,
-            textColor = MaterialTheme.colorScheme.onPrimary,
+        Column(modifier = Modifier.fillMaxSize()) {
+            SubcomposeAsyncImage(
+                model = character.image,
+                contentDescription = null,
+                modifier = Modifier.height(170.dp).fillMaxWidth(),
+                contentScale = ContentScale.Crop,
+                loading = {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(shimmerBrush())
+                    )
+                }
+            )
+            HorizontalDivider(color = strokeColor, thickness = strokeWidth)
+            VerticalSpacer(Dimens.small)
+            StrokedText(
+                modifier = Modifier.fillMaxWidth().padding(horizontal = Dimens.smallAlt),
+                text = character.name,
+                textColor = MaterialTheme.colorScheme.onPrimary,
+            )
+        }
+        CharacterStatus(
+            status = character.status,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = Dimens.small, end = Dimens.small)
         )
     }
 }
