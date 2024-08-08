@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.cocoapods.get().pluginId)
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.serialization.get().pluginId)
+    id(libs.plugins.mokkery.get().pluginId)
     id(libs.plugins.realm.get().pluginId)
 }
 
@@ -50,6 +51,10 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.coroutines.test)
         }
     }
 }

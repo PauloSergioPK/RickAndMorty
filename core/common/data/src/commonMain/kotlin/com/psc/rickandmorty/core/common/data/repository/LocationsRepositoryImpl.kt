@@ -1,6 +1,6 @@
 package com.psc.rickandmorty.core.common.data.repository
 
-import com.psc.rickandmorty.core.common.data.datasource.local.LocationLocalDataSourceImpl
+import com.psc.rickandmorty.core.common.data.datasource.local.LocationLocalDataSource
 import com.psc.rickandmorty.core.common.data.datasource.remote.LocationRemoteDataSource
 import com.psc.rickandmorty.core.common.domain.repository.LocationsRepository
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 
 internal class LocationsRepositoryImpl(
     private val remoteDataSource: LocationRemoteDataSource,
-    private val localDataSource: LocationLocalDataSourceImpl
+    private val localDataSource: LocationLocalDataSource
 ) : LocationsRepository {
 
 
