@@ -6,6 +6,7 @@ plugins {
     id(libs.plugins.kotlin.cocoapods.get().pluginId)
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.serialization.get().pluginId)
+    id(libs.plugins.mokkery.get().pluginId)
 }
 
 kotlin {
@@ -43,6 +44,10 @@ kotlin {
         }
         androidMain.dependencies {
             api(libs.koin.android)
+        }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.coroutines.test)
         }
     }
 }

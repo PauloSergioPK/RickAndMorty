@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.firebase.crashlytics) apply false
     alias(libs.plugins.jetbrains.compose) apply false
     alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.mokkery) apply false
     alias(libs.plugins.realm) apply false
     alias(libs.plugins.room) apply false
 }
