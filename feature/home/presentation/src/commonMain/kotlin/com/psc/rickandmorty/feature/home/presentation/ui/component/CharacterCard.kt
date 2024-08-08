@@ -30,13 +30,13 @@ internal fun CharacterCard(
     modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(Dimens.defaultAlt)
-    val stroke = Color.Black
+    val strokeColor = Color.Black
     val strokeWidth = 2.dp
 
     Column(
         modifier = modifier.then(
             Modifier.clip(shape)
-                .border(width = strokeWidth, color = stroke, shape = shape)
+                .border(width = strokeWidth, color = strokeColor, shape = shape)
                 .background(color = MaterialTheme.colorScheme.primary, shape = shape)
                 .padding(bottom = Dimens.defaultAlt)
         ),
@@ -54,7 +54,7 @@ internal fun CharacterCard(
                 )
             }
         )
-        HorizontalDivider(color = stroke, thickness = strokeWidth)
+        HorizontalDivider(color = strokeColor, thickness = strokeWidth)
         VerticalSpacer(Dimens.small)
         StrokedText(
             modifier = Modifier.fillMaxWidth().padding(horizontal = Dimens.smallAlt),
