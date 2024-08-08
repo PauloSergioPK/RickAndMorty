@@ -24,7 +24,10 @@ internal fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(Dimens.default),
             contentPadding = PaddingValues(Dimens.bigAlt)
         ) {
-            items(state.characters) {
+            items(
+                items = state.characters,
+                key = { it.id }
+            ) {
                 CharacterCard(character = it)
             }
         }
