@@ -39,7 +39,7 @@ class HomeViewModel(
 
     private fun fetchCharacters(page: Int) {
         viewModelScope.launch {
-            if (!hasLoadedAllPages) {
+            if (!hasLoadedAllPages && !uiState.value.isLoading) {
                 _uiState.update { it.copy(isLoading = true) }
 
                 val result = getCharactersPageUseCase(page)

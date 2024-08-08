@@ -4,5 +4,5 @@ import com.psc.rickandmorty.core.common.domain.model.Character
 
 data class HomeState(
     val characters: List<Character> = listOf(),
-    val isLoading: Boolean = true
+    val isLoading: Boolean = false
 )

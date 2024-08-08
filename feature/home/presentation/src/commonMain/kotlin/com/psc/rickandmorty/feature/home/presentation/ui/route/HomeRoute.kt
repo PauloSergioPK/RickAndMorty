@@ -25,7 +25,7 @@ fun HomeRoute(
             val lastDisplayedCharacterIndex = visibleItemsInfo.lastOrNull()?.index
 
             if (lastDisplayedCharacterIndex != null) {
-                lastDisplayedCharacterIndex >= currentCharactersCount - (PAGE_SIZE/2)
+                lastDisplayedCharacterIndex >= currentCharactersCount - (PAGE_SIZE / 2)
             } else false
         }
     }

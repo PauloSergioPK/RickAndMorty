@@ -72,3 +72,21 @@ internal fun CharacterCard(
         )
     }
 }
+
+@Composable
+internal fun CharacterLoadingCard() {
+    val shape = RoundedCornerShape(Dimens.defaultAlt)
+    val strokeColor = Color.Black
+    val strokeWidth = 2.dp
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(200.dp)
+            .clip(shape)
+            .border(width = strokeWidth, color = strokeColor, shape = shape)
+            .background(color = MaterialTheme.colorScheme.primary, shape = shape)
+    ) {
+        Box(modifier = Modifier.fillMaxSize().background(shimmerBrush()))
+    }
+}

@@ -8,8 +8,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import com.psc.rickandmorty.core.designsystem.util.Dimens
 import com.psc.rickandmorty.feature.home.presentation.ui.component.CharacterCard
+import com.psc.rickandmorty.feature.home.presentation.ui.component.CharacterLoadingCard
 
 @Composable
 internal fun HomeScreen(
@@ -29,6 +31,9 @@ internal fun HomeScreen(
                 key = { it.id }
             ) {
                 CharacterCard(character = it)
+            }
+            if (state.isLoading) {
+                items(count = PAGE_SIZE / 3) { CharacterLoadingCard() }
             }
         }
     }
