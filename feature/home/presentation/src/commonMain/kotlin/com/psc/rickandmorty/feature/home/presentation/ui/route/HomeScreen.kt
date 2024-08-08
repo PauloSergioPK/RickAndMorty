@@ -1,8 +1,8 @@
 package com.psc.rickandmorty.feature.home.presentation.ui.route
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -21,12 +21,11 @@ internal fun HomeScreen(
             state = lazyGridState,
             columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(Dimens.default),
-            horizontalArrangement = Arrangement.spacedBy(Dimens.default)
+            horizontalArrangement = Arrangement.spacedBy(Dimens.default),
+            contentPadding = PaddingValues(Dimens.bigAlt)
         ) {
             items(state.characters) {
-                CharacterCard(
-                    character = it,
-                )
+                CharacterCard(character = it)
             }
         }
     }
