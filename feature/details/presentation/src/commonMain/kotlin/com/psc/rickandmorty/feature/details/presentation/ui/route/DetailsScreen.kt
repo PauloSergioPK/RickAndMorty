@@ -4,17 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.designsystem.scaffold.ScrollableScreenContainer
 import com.psc.rickandmorty.core.designsystem.spacer.VerticalSpacer
 import com.psc.rickandmorty.core.designsystem.theme.AppTheme
 import com.psc.rickandmorty.core.designsystem.util.Dimens
-import com.psc.rickandmorty.core.designsystem.util.responsiveSp
+import com.psc.rickandmorty.feature.details.presentation.ui.component.CharacterAbout
 
 @Composable
 internal fun DetailsScreen(
@@ -26,13 +24,10 @@ internal fun DetailsScreen(
         imageUri = character.image,
     ) {
         Column(modifier = Modifier.fillMaxWidth().background(AppTheme.colorScheme.background)) {
-            Text(
-                text = character.name,
-                fontSize = 28.responsiveSp,
-                fontWeight = FontWeight.SemiBold,
+            CharacterAbout(
+                character = character,
                 modifier = Modifier.padding(start = Dimens.bigAlt)
             )
-            VerticalSpacer(Dimens.small)
             VerticalSpacer(1000.dp) //fixme
         }
 
