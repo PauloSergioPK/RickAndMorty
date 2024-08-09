@@ -23,5 +23,6 @@ include(":core:common:domain")
 include(":core:common:presentation")
 include(":core:designsystem")
 
+include(":feature:details:presentation")
 include(":feature:home:presentation")
 include(":feature:splash:presentation")

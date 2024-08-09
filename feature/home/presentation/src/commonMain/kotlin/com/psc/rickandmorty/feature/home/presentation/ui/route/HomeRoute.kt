@@ -46,6 +46,7 @@ fun HomeRoute(
 
     HomeScreen(
         state = state,
-        lazyGridState = lazyGridState
+        lazyGridState = lazyGridState,
+        onCharacterClicked = { onNavigateToDetails(it) }
     )
 }

@@ -36,6 +36,7 @@ kotlin {
             export(projects.core.common.presentation)
             export(projects.core.designsystem)
 
+            export(projects.feature.details.presentation)
             export(projects.feature.home.presentation)
             export(projects.feature.splash.presentation)
         }
@@ -50,6 +51,7 @@ kotlin {
             api(projects.core.common.presentation)
             api(projects.core.designsystem)
 
+            api(projects.feature.details.presentation)
             api(projects.feature.home.presentation)
             api(projects.feature.splash.presentation)
 
@@ -57,6 +59,8 @@ kotlin {
             api(libs.koin.compose)
 
             api(libs.navigation.compose)
+
+            implementation(libs.urlencoder.lib)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

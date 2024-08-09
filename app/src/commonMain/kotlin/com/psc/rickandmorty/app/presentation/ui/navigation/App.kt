@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import coil3.annotation.ExperimentalCoilApi
 import coil3.compose.setSingletonImageLoaderFactory
 import com.psc.rickandmorty.app.presentation.model.Routes
+import com.psc.rickandmorty.app.presentation.ui.navigation.details.detailsNavigation
 import com.psc.rickandmorty.app.presentation.ui.navigation.home.homeNavigation
 import com.psc.rickandmorty.app.presentation.ui.navigation.splash.splashNavigation
 import com.psc.rickandmorty.core.designsystem.theme.AppTheme
@@ -27,8 +28,9 @@ fun App() {
                 startDestination = Routes.SPLASH.name,
                 modifier = Modifier.fillMaxSize(),
             ) {
-                homeNavigation(navController)
                 splashNavigation(navController)
+                homeNavigation(navController)
+                detailsNavigation(navController)
             }
         }
     }
