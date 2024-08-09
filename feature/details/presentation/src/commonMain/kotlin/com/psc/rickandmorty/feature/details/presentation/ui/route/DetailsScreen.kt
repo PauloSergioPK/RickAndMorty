@@ -5,14 +5,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.designsystem.scaffold.ScrollableScreenContainer
 import com.psc.rickandmorty.core.designsystem.spacer.VerticalSpacer
 import com.psc.rickandmorty.core.designsystem.theme.AppTheme
 import com.psc.rickandmorty.core.designsystem.util.Dimens
 import com.psc.rickandmorty.feature.details.presentation.ui.component.CharacterAbout
+import com.psc.rickandmorty.feature.details.presentation.ui.component.LastKnowLocationInfo
+import com.psc.rickandmorty.feature.details.presentation.ui.component.OriginInfo
 
 @Composable
 internal fun DetailsScreen(
@@ -28,7 +30,15 @@ internal fun DetailsScreen(
                 character = character,
                 modifier = Modifier.padding(start = Dimens.bigAlt)
             )
-            VerticalSpacer(1000.dp) //fixme
+            VerticalSpacer(Dimens.biggerAlt)
+            character.origin?.let {
+                OriginInfo(it)
+                VerticalSpacer(Dimens.biggerAlt)
+            }
+            character.lastKnownLocation?.let {
+                LastKnowLocationInfo(location = it, modifier = Modifier.align(Alignment.End))
+                VerticalSpacer(Dimens.biggerAlt)
+            }
         }
 
     }

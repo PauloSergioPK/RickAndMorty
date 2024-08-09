@@ -2,10 +2,8 @@ package com.psc.rickandmorty.feature.details.presentation.ui.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import com.psc.rickandmorty.core.common.domain.model.Character
@@ -79,51 +77,26 @@ internal fun CharacterAbout(
         Column(
             verticalArrangement = Arrangement.spacedBy(Dimens.smallAlt)
         ) {
-            Info(
+            LabelAndInfo(
                 label = stringResource(stringDesignSystem.status),
-                text = status
+                info = status
             )
             if (species.isNotEmpty()) {
-                Info(
+                LabelAndInfo(
                     label = stringResource(stringDesignSystem.species),
-                    text = species
+                    info = species
                 )
             }
             if (type.isNotEmpty()) {
-                Info(
+                LabelAndInfo(
                     label = stringResource(stringDesignSystem.type),
-                    text = type
+                    info = type
                 )
             }
-            Info(
+            LabelAndInfo(
                 label = stringResource(stringDesignSystem.gender),
-                text = gender
+                info = gender
             )
         }
     }
-}
-
-@Composable
-private fun Info(
-    label: String,
-    text: String
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(Dimens.tiny, Alignment.Start)
-    ) {
-        Text(
-            text = label.plus(":"),
-            fontSize = 16.responsiveSp,
-            fontWeight = FontWeight.Normal,
-            color = colorScheme.onBackground.copy(alpha = 0.8F)
-        )
-        Text(
-            text = text,
-            fontSize = 16.responsiveSp,
-            fontWeight = FontWeight.Medium,
-            color = colorScheme.onBackground
-        )
-    }
-
 }
