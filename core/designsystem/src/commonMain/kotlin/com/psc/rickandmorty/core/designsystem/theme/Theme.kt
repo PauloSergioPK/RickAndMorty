@@ -51,7 +51,9 @@ fun AppTheme(
         error = Color(0XFFFF0A0A),
         onError = Color(0xFFFFFFFF),
         background = Color(0xFFD6D3FD),
-        onBackground = Color(0xFF141414)
+        onBackground = Color(0xFF141414),
+        surface = Color(0XFFDAC4F3),
+        onSurface = Color(0xFF000000)
     )
 
     val extendedColors = ExtendedColors(

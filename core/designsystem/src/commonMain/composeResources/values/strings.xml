@@ -22,6 +22,7 @@
 
     <!--Episode-->
     <string name="episode_appearances">Episode appearances</string>
+    <string name="episode_details_placeholder">%1$s - %2$s</string>
 
 
 </resources>
