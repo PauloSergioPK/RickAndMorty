@@ -23,22 +23,10 @@ class LocationRemoteDataSourceImplTest {
 
     @Test
     fun `when calls getAllEpisodes then request all pages to service`() = runTest {
-        val expected = mutableListOf<Location>()
-        repeat(TOTAL_LOCATIONS) { expected.add(Mock.location) }
-        val pages = mutableListOf<LocationsPageResponse>()
-        repeat(TOTAL_PAGES) {
-            pages.add(
-                LocationsPageResponse(
-                    infoResponse = PageInfoResponse(
-                        count = PAGE_SIZE * TOTAL_PAGES,
-                        pages = TOTAL_PAGES
-                    ),
-                    results = getLocationsResponse()
-                )
-            )
-        }
+        val expected = getLocations()
+        val pagesResponses = getPagesResponses()
 
-        everySuspend { service.getPage(any()) } calls { (page: Int) -> pages[page.dec()] }
+        everySuspend { service.getPage(any()) } calls { (page: Int) -> pagesResponses[page.dec()] }
         val result = datasource.getAllLocations()
 
         assertEquals(result, expected)
@@ -47,6 +35,30 @@ class LocationRemoteDataSourceImplTest {
                 service.getPage(page.inc())
             }
         }
+    }
+
+    private fun getLocations(): List<Location> {
+        val locations = mutableListOf<Location>()
+        repeat(TOTAL_LOCATIONS) { locations.add(Mock.location) }
+
+        return locations
+    }
+
+    private fun getPagesResponses(): List<LocationsPageResponse> {
+        val pages = mutableListOf<LocationsPageResponse>()
+        repeat(TOTAL_PAGES) {
+            pages.add(
+                LocationsPageResponse(
+                    infoResponse = PageInfoResponse(
+                        count = TOTAL_LOCATIONS,
+                        pages = TOTAL_PAGES
+                    ),
+                    results = getLocationsResponse()
+                )
+            )
+        }
+
+        return pages
     }
 
     private fun getLocationsResponse(): List<LocationResponse> {
@@ -58,7 +70,7 @@ class LocationRemoteDataSourceImplTest {
 
     private companion object {
         const val TOTAL_PAGES = 3
-        const val TOTAL_LOCATIONS = 60
+        const val TOTAL_LOCATIONS = TOTAL_PAGES * PAGE_SIZE
     }
 
 }

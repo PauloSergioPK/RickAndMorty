@@ -23,22 +23,10 @@ class EpisodeRemoteDataSourceImplTest {
 
     @Test
     fun `when calls getAllEpisodes then request all pages to service`() = runTest {
-        val expected = mutableListOf<Episode>()
-        repeat(TOTAL_EPISODES) { expected.add(Mock.episode) }
-        val pages = mutableListOf<EpisodesPageResponse>()
-        repeat(TOTAL_PAGES) {
-            pages.add(
-                EpisodesPageResponse(
-                    infoResponse = PageInfoResponse(
-                        count = PAGE_SIZE * TOTAL_PAGES,
-                        pages = TOTAL_PAGES
-                    ),
-                    results = getEpisodesResponse()
-                )
-            )
-        }
+        val expected = getEpisodes()
+        val pagesResponses = getPagesResponses()
 
-        everySuspend { service.getPage(any()) } calls { (page: Int) -> pages[page.dec()] }
+        everySuspend { service.getPage(any()) } calls { (page: Int) -> pagesResponses[page.dec()] }
         val result = datasource.getAllEpisodes()
 
         assertEquals(result, expected)
@@ -47,6 +35,30 @@ class EpisodeRemoteDataSourceImplTest {
                 service.getPage(page.inc())
             }
         }
+    }
+
+    private fun getEpisodes(): List<Episode> {
+        val episodes = mutableListOf<Episode>()
+        repeat(TOTAL_EPISODES) { episodes.add(Mock.episode) }
+
+        return episodes
+    }
+
+    private fun getPagesResponses(): List<EpisodesPageResponse> {
+        val pages = mutableListOf<EpisodesPageResponse>()
+        repeat(TOTAL_PAGES) {
+            pages.add(
+                EpisodesPageResponse(
+                    infoResponse = PageInfoResponse(
+                        count = TOTAL_EPISODES,
+                        pages = TOTAL_PAGES
+                    ),
+                    results = getEpisodesResponse()
+                )
+            )
+        }
+
+        return pages
     }
 
     private fun getEpisodesResponse(): List<EpisodeResponse> {
@@ -58,7 +70,7 @@ class EpisodeRemoteDataSourceImplTest {
 
     private companion object {
         const val TOTAL_PAGES = 3
-        const val TOTAL_EPISODES = 60
+        const val TOTAL_EPISODES = PAGE_SIZE * TOTAL_PAGES
     }
 
 }

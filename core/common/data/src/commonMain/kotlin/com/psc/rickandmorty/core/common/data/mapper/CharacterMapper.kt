@@ -25,7 +25,7 @@ fun CharacterResponse.toCharacter(
         status = status.toCharacterStatus(),
         species = species,
         type = type,
-        gender = status.toCharacterGender(),
+        gender = gender.toCharacterGender(),
         origin = originLocation,
         lastKnownLocation = lastKnownLocation,
         image = image,
