@@ -2,7 +2,7 @@ package com.psc.rickandmorty.core.common.data.repository
 
 import com.psc.rickandmorty.core.common.data.datasource.local.LocationLocalDataSource
 import com.psc.rickandmorty.core.common.data.datasource.remote.LocationRemoteDataSource
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import dev.mokkery.answering.returns
 import dev.mokkery.answering.throws
 import dev.mokkery.everySuspend
@@ -28,7 +28,7 @@ class LocationsRepositoryImplTest {
     @Test
     fun `when calls fetchLocations and remoteDataSource returns locations then add them on localDataSource and return ResultSuccess`() {
         runTest {
-            val locations = listOf(Mock.location)
+            val locations = listOf(MockUtils.location)
             val expected = Result.success(Unit)
 
             everySuspend { remoteDataSource.getAllLocations() } returns locations

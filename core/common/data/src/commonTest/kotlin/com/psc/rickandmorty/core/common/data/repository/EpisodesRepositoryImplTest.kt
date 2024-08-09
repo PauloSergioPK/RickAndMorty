@@ -2,7 +2,7 @@ package com.psc.rickandmorty.core.common.data.repository
 
 import com.psc.rickandmorty.core.common.data.datasource.local.EpisodeLocalDataSource
 import com.psc.rickandmorty.core.common.data.datasource.remote.EpisodeRemoteDataSource
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import dev.mokkery.answering.returns
 import dev.mokkery.answering.throws
 import dev.mokkery.everySuspend
@@ -28,7 +28,7 @@ class EpisodesRepositoryImplTest {
     @Test
     fun `when calls fetchEpisodes and remoteDataSource returns episodes then add them on localDataSource and return ResultSuccess`() {
         runTest {
-            val episodes = listOf(Mock.episode)
+            val episodes = listOf(MockUtils.episode)
             val expected = Result.success(Unit)
 
             everySuspend { remoteDataSource.getAllEpisodes() } returns episodes

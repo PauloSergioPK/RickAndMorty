@@ -1,7 +1,7 @@
 package com.psc.rickandmorty.core.common.domain.usecase
 
 import com.psc.rickandmorty.core.common.domain.repository.CharactersRepository
-import com.psc.rickandmorty.core.common.domain.util.Mock
+import com.psc.rickandmorty.core.common.domain.util.MockUtils
 import dev.mokkery.answering.returns
 import dev.mokkery.everySuspend
 import dev.mokkery.matcher.any
@@ -19,7 +19,7 @@ class GetCharactersPageUseCaseImplTest {
     @Test
     fun `when calls useCase then calls repository`() = runTest {
         val page = (0..100).random()
-        val expected = Result.success(Mock.charactersPage)
+        val expected = Result.success(MockUtils.charactersPage)
 
         everySuspend { repository.getPage(any()) } returns expected
         val result = useCase(page)

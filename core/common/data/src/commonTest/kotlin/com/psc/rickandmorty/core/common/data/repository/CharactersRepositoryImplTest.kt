@@ -1,7 +1,7 @@
 package com.psc.rickandmorty.core.common.data.repository
 
 import com.psc.rickandmorty.core.common.data.datasource.remote.CharactersRemoteDataSource
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 import dev.mokkery.answering.returns
 import dev.mokkery.answering.throws
@@ -22,7 +22,7 @@ class CharactersRepositoryImplTest {
     fun `when calls getPage and remoteDataSource returns characters then return ResultSuccess with them`() {
         runTest {
             val page = (0..100).random()
-            val characters = Mock.charactersPage
+            val characters = MockUtils.charactersPage
             val expected = Result.success(characters)
 
             everySuspend { remoteDataSource.getPage(any()) } returns characters

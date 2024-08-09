@@ -2,7 +2,7 @@ package com.psc.rickandmorty.core.common.data.datasource.local
 
 import com.psc.rickandmorty.core.common.data.mapper.toEpisode
 import com.psc.rickandmorty.core.common.data.model.dto.EpisodeDto
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.Episode
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
@@ -48,7 +48,7 @@ class EpisodeLocalDataSourceImplTest {
     @Test
     fun `when calls addEpisodes then upsert on realm`() {
         runTest {
-            val episodes = listOf(Mock.episode)
+            val episodes = listOf(MockUtils.episode)
 
             datasource.addEpisodes(episodes)
             val insertedEpisodes = getAllEpisodes()
@@ -65,7 +65,7 @@ class EpisodeLocalDataSourceImplTest {
     @Test
     fun `when calls getEpisodeById and exists an episode with given id then return it`() {
         runTest {
-            val expected = Mock.episode
+            val expected = MockUtils.episode
             val id = expected.id
             val episodes = listOf(expected)
 
@@ -79,7 +79,7 @@ class EpisodeLocalDataSourceImplTest {
     @Test
     fun `when calls getEpisodeById and doesn't exists an episode with given id then return null`() {
         runTest {
-            val episode = Mock.episode
+            val episode = MockUtils.episode
             val id = episode.id.inc()
             val episodes = listOf(episode)
 

@@ -6,7 +6,7 @@ import com.psc.rickandmorty.core.common.domain.model.CharacterStatus
 import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 import com.psc.rickandmorty.core.common.domain.model.Location
 
-object Mock {
+object MockUtils {
     val character = Character(
         id = 1,
         name = "Rick Sanchez",

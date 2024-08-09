@@ -2,6 +2,8 @@ package com.psc.rickandmorty.core.common.data.service
 
 import com.psc.rickandmorty.core.common.data.model.response.EpisodesPageResponse
 import com.psc.rickandmorty.core.common.data.provider.HttpClientProvider
+import com.psc.rickandmorty.core.common.data.util.Consts.BASE_URL
+import com.psc.rickandmorty.core.common.data.util.Consts.PAGE
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -23,8 +25,6 @@ internal class EpisodeServiceImpl(
     }
 
     private companion object {
-        const val BASE_URL = "https://rickandmortyapi.com/api/"
         const val EPISODE = "episode/"
-        const val PAGE = "page"
     }
 }

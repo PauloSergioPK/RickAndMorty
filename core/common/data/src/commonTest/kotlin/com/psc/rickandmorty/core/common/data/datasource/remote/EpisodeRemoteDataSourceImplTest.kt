@@ -4,7 +4,7 @@ import com.psc.rickandmorty.core.common.data.model.response.EpisodeResponse
 import com.psc.rickandmorty.core.common.data.model.response.EpisodesPageResponse
 import com.psc.rickandmorty.core.common.data.model.response.PageInfoResponse
 import com.psc.rickandmorty.core.common.data.service.EpisodeService
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.Episode
 import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import dev.mokkery.answering.calls
@@ -39,7 +39,7 @@ class EpisodeRemoteDataSourceImplTest {
 
     private fun getEpisodes(): List<Episode> {
         val episodes = mutableListOf<Episode>()
-        repeat(TOTAL_EPISODES) { episodes.add(Mock.episode) }
+        repeat(TOTAL_EPISODES) { episodes.add(MockUtils.episode) }
 
         return episodes
     }
@@ -63,7 +63,7 @@ class EpisodeRemoteDataSourceImplTest {
 
     private fun getEpisodesResponse(): List<EpisodeResponse> {
         val episodesResponse = mutableListOf<EpisodeResponse>()
-        repeat(PAGE_SIZE) { episodesResponse.add(Mock.episodeResponse) }
+        repeat(PAGE_SIZE) { episodesResponse.add(MockUtils.episodeResponse) }
 
         return episodesResponse
     }

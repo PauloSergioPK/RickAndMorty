@@ -4,7 +4,7 @@ import com.psc.rickandmorty.core.common.data.model.response.LocationResponse
 import com.psc.rickandmorty.core.common.data.model.response.LocationsPageResponse
 import com.psc.rickandmorty.core.common.data.model.response.PageInfoResponse
 import com.psc.rickandmorty.core.common.data.service.LocationService
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.Location
 import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import dev.mokkery.answering.calls
@@ -39,7 +39,7 @@ class LocationRemoteDataSourceImplTest {
 
     private fun getLocations(): List<Location> {
         val locations = mutableListOf<Location>()
-        repeat(TOTAL_LOCATIONS) { locations.add(Mock.location) }
+        repeat(TOTAL_LOCATIONS) { locations.add(MockUtils.location) }
 
         return locations
     }
@@ -63,7 +63,7 @@ class LocationRemoteDataSourceImplTest {
 
     private fun getLocationsResponse(): List<LocationResponse> {
         val episodesResponse = mutableListOf<LocationResponse>()
-        repeat(PAGE_SIZE) { episodesResponse.add(Mock.locationResponse) }
+        repeat(PAGE_SIZE) { episodesResponse.add(MockUtils.locationResponse) }
 
         return episodesResponse
     }

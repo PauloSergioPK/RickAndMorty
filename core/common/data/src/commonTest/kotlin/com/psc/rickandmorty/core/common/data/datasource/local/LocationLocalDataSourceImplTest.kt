@@ -2,7 +2,7 @@ package com.psc.rickandmorty.core.common.data.datasource.local
 
 import com.psc.rickandmorty.core.common.data.mapper.toLocation
 import com.psc.rickandmorty.core.common.data.model.dto.LocationDto
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.Location
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
@@ -47,7 +47,7 @@ class LocationLocalDataSourceImplTest {
     @Test
     fun `when calls addLocations then upsert on realm`() {
         runTest {
-            val locations = listOf(Mock.location)
+            val locations = listOf(MockUtils.location)
 
             datasource.addLocations(locations)
             val insertedLocations = getAllLocations()
@@ -64,7 +64,7 @@ class LocationLocalDataSourceImplTest {
     @Test
     fun `when calls getLocationById and exists an location with given id then return it`() {
         runTest {
-            val expected = Mock.location
+            val expected = MockUtils.location
             val id = expected.id
             val locations = listOf(expected)
 
@@ -78,7 +78,7 @@ class LocationLocalDataSourceImplTest {
     @Test
     fun `when calls getLocationById and doesn't exists an Location with given id then return null`() {
         runTest {
-            val location = Mock.location
+            val location = MockUtils.location
             val id = location.id.inc()
             val locations = listOf(location)
 

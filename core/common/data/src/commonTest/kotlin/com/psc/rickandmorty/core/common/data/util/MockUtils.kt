@@ -10,9 +10,15 @@ import com.psc.rickandmorty.core.common.domain.model.CharacterStatus
 import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 import com.psc.rickandmorty.core.common.domain.model.Episode
 import com.psc.rickandmorty.core.common.domain.model.Location
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 
-object Mock {
+object MockUtils {
     val location = Location(
         id = 1,
         name = "Earth (C-137)",
@@ -78,4 +84,20 @@ object Mock {
         type = "Planet",
         dimension = "Dimension C-137"
     )
+
+    @OptIn(ExperimentalSerializationApi::class)
+    fun getHttpClient(engine: HttpClientEngine): HttpClient {
+        return HttpClient(engine) {
+            install(ContentNegotiation) {
+                json(
+                    Json {
+                        prettyPrint = true
+                        isLenient = true
+                        ignoreUnknownKeys = true
+                        explicitNulls = false
+                    }
+                )
+            }
+        }
+    }
 }

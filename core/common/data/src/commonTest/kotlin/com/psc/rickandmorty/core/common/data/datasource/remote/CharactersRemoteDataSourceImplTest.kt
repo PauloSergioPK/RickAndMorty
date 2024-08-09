@@ -6,7 +6,7 @@ import com.psc.rickandmorty.core.common.data.model.response.CharacterResponse
 import com.psc.rickandmorty.core.common.data.model.response.CharactersPageResponse
 import com.psc.rickandmorty.core.common.data.model.response.PageInfoResponse
 import com.psc.rickandmorty.core.common.data.service.CharactersService
-import com.psc.rickandmorty.core.common.data.util.Mock
+import com.psc.rickandmorty.core.common.data.util.MockUtils
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 import com.psc.rickandmorty.core.common.domain.util.Consts.FIRST_PAGE
@@ -47,8 +47,8 @@ class CharactersRemoteDataSourceImplTest {
         )
 
         everySuspend { charactersService.getPage(any()) } returns pageResponse
-        everySuspend { episodesLocalDataSource.getEpisodeById(any()) } returns Mock.episode
-        everySuspend { locationsLocalDataSource.getLocationById(any()) } returns Mock.location
+        everySuspend { episodesLocalDataSource.getEpisodeById(any()) } returns MockUtils.episode
+        everySuspend { locationsLocalDataSource.getLocationById(any()) } returns MockUtils.location
         val result = datasource.getPage(page)
 
         assertEquals(result, expected)
@@ -65,7 +65,7 @@ class CharactersRemoteDataSourceImplTest {
 
     private fun getCharacters(): List<Character> {
         val characters = mutableListOf<Character>()
-        repeat(PAGE_SIZE) { characters.add(Mock.character) }
+        repeat(PAGE_SIZE) { characters.add(MockUtils.character) }
 
         return characters
     }
@@ -82,14 +82,14 @@ class CharactersRemoteDataSourceImplTest {
 
     private fun getCharactersResponse(): List<CharacterResponse> {
         val charactersResponse = mutableListOf<CharacterResponse>()
-        repeat(PAGE_SIZE) { charactersResponse.add(Mock.characterResponse) }
+        repeat(PAGE_SIZE) { charactersResponse.add(MockUtils.characterResponse) }
 
         return charactersResponse
     }
 
     private fun getLocationIds(): List<Int?> {
-        val originReferenceUrl = Mock.characterResponse.originReference.url
-        val lastKnownLocationReferenceUrl = Mock.characterResponse.lastKnownLocationReference.url
+        val originReferenceUrl = MockUtils.characterResponse.originReference.url
+        val lastKnownLocationReferenceUrl = MockUtils.characterResponse.lastKnownLocationReference.url
         val originLocationId = getIdFromUrl(originReferenceUrl)
         val lastKnownLocationId = getIdFromUrl(lastKnownLocationReferenceUrl)
 
@@ -98,7 +98,7 @@ class CharactersRemoteDataSourceImplTest {
 
     private fun getEpisodeIds(): List<Int?> {
         val ids = mutableListOf<Int?>()
-        Mock.characterResponse.episodesReferences.forEach { url -> ids.add(getIdFromUrl(url)) }
+        MockUtils.characterResponse.episodesReferences.forEach { url -> ids.add(getIdFromUrl(url)) }
 
         return ids
     }
