@@ -6,7 +6,7 @@ import com.psc.rickandmorty.core.common.data.model.dto.EpisodeDto
 import com.psc.rickandmorty.core.common.domain.model.Episode
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 
 internal class EpisodeLocalDataSourceImpl(
     private val realm: Realm
@@ -20,13 +20,13 @@ internal class EpisodeLocalDataSourceImpl(
         }
     }
 
-    override suspend fun getEpisodeById(id: Int): Episode {
+    override suspend fun getEpisodeById(id: Int): Episode? {
         val episodeDto = realm.query(
             clazz = EpisodeDto::class,
             query = "id == $0 LIMIT(1)",
             id
-        ).find().asFlow().first().list.first()
+        ).find().asFlow().firstOrNull()?.list?.firstOrNull()
 
-        return episodeDto.toEpisode()
+        return episodeDto?.toEpisode()
     }
 }

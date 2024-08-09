@@ -26,7 +26,7 @@ internal class CharactersRemoteDataSourceImpl(
                 locationLocalDataSource.getLocationById(it)
             }
 
-            val episodes = episodesIds.map { episodesLocalDataSource.getEpisodeById(it) }
+            val episodes = episodesIds.mapNotNull { episodesLocalDataSource.getEpisodeById(it) }
 
             character.toCharacter(
                 originLocation = originLocation,

@@ -1,5 +1,6 @@
 package com.psc.rickandmorty.core.common.data.util
 
+import com.psc.rickandmorty.core.common.data.mapper.toEpisodeDto
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.common.domain.model.CharacterGender
 import com.psc.rickandmorty.core.common.domain.model.CharacterStatus
@@ -37,4 +38,5 @@ object Mock {
         airDate = LocalDate(2013, 12, 2),
         seasonAndEpisode = "S01E01"
     )
+    internal val episodeDto = episode.toEpisodeDto()
 }

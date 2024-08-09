@@ -6,7 +6,7 @@ import com.psc.rickandmorty.core.common.data.model.dto.LocationDto
 import com.psc.rickandmorty.core.common.domain.model.Location
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 
 internal class LocationLocalDataSourceImpl(
     private val realm: Realm
@@ -19,13 +19,13 @@ internal class LocationLocalDataSourceImpl(
         }
     }
 
-    override suspend fun getLocationById(id: Int): Location {
+    override suspend fun getLocationById(id: Int): Location? {
         val locationDto = realm.query(
             clazz = LocationDto::class,
             query = "id == $0 LIMIT(1)",
             id
-        ).find().asFlow().first().list.first()
+        ).find().asFlow().firstOrNull()?.list?.firstOrNull()
 
-        return locationDto.toLocation()
+        return locationDto?.toLocation()
     }
 }
