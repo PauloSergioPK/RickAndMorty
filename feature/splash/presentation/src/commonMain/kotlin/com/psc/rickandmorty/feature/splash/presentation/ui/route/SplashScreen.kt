@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.psc.rickandmorty.core.designsystem.animation.JsonAnimation
 
 @Composable
 internal fun SplashScreen() {
@@ -15,6 +16,9 @@ internal fun SplashScreen() {
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.primary)
     ) {
-        Text("Uma animação bem legal aqui")
+        JsonAnimation(
+            jsonPath = ("files/anim_splash.json"),
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }

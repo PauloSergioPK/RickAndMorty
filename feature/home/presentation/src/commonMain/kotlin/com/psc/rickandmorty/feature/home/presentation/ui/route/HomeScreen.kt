@@ -28,7 +28,7 @@ internal fun HomeScreen(
             columns = GridCells.Fixed(2),
             verticalArrangement = Arrangement.spacedBy(Dimens.default),
             horizontalArrangement = Arrangement.spacedBy(Dimens.default),
-            contentPadding = PaddingValues(Dimens.bigAlt)
+            contentPadding = PaddingValues(horizontal = Dimens.bigAlt, vertical = Dimens.huge)
         ) {
             items(
                 items = state.characters,
