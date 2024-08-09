@@ -4,16 +4,19 @@ import com.psc.rickandmorty.core.common.data.datasource.local.EpisodeLocalDataSo
 import com.psc.rickandmorty.core.common.data.datasource.local.LocationLocalDataSource
 import com.psc.rickandmorty.core.common.data.mapper.toCharacter
 import com.psc.rickandmorty.core.common.data.service.CharactersService
-import com.psc.rickandmorty.core.common.domain.model.Character
+import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 
 internal class CharactersRemoteDataSourceImpl(
     private val charactersService: CharactersService,
     private val episodesLocalDataSource: EpisodeLocalDataSource,
     private val locationLocalDataSource: LocationLocalDataSource
 ) : CharactersRemoteDataSource {
-    override suspend fun getPage(page: Int): List<Character> {
+    override suspend fun getPage(page: Int): CharactersPage {
         val pageResponse = charactersService.getPage(page)
-        return pageResponse.results.map { character ->
+        val totalPages = pageResponse.infoResponse.pages
+        val remainingPages = totalPages - page
+
+        val characters = pageResponse.results.map { character ->
             val originLocationId = getIdFromUrl(character.originReference.url)
             val lastKnownLocationId = getIdFromUrl(character.lastKnownLocationReference.url)
             val episodesIds = character.episodesReferences.mapNotNull { getIdFromUrl(it) }
@@ -34,6 +37,12 @@ internal class CharactersRemoteDataSourceImpl(
                 episodes = episodes
             )
         }
+
+        return CharactersPage(
+            page = page,
+            remainingPages = remainingPages,
+            characters = characters
+        )
     }
 
     private fun getIdFromUrl(url: String): Int? {

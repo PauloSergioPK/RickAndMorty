@@ -19,7 +19,7 @@ class GetCharactersPageUseCaseImplTest {
     @Test
     fun `when calls useCase then calls repository`() = runTest {
         val page = (0..100).random()
-        val expected = Result.success(listOf(Mock.character))
+        val expected = Result.success(Mock.charactersPage)
 
         everySuspend { repository.getPage(any()) } returns expected
         val result = useCase(page)

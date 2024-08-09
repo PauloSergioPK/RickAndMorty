@@ -5,6 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class CharactersPageResponse(
+    @SerialName("info")
+    val infoResponse: PageInfoResponse,
+    
     @SerialName("results")
     val results: List<CharacterResponse>
 )

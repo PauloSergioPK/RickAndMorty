@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.psc.rickandmorty.core.common.domain.usecase.GetCharactersPageUseCase
 import com.psc.rickandmorty.core.common.domain.util.Consts.FIRST_PAGE
-import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -22,17 +21,17 @@ class HomeViewModel(
     private val _uiEvent = Channel<HomeUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    private var currentPage = FIRST_PAGE
+    private var pageToLoad = FIRST_PAGE
     private var hasLoadedAllPages = false
 
     init {
-        fetchCharacters(currentPage)
+        fetchCharacters(pageToLoad)
     }
 
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.OnCharacterListEndReached -> {
-                fetchCharacters(currentPage)
+                fetchCharacters(pageToLoad)
             }
         }
     }
@@ -43,19 +42,26 @@ class HomeViewModel(
                 _uiState.update { it.copy(isLoading = true) }
 
                 val result = getCharactersPageUseCase(page)
-                val pageCharacters = result.getOrNull() ?: listOf()
+                val charactersPage = result.getOrNull()
 
-                if (pageCharacters.size < PAGE_SIZE) {
-                    hasLoadedAllPages = true
-                }
+                if (charactersPage != null) {
+                    val remainingPages = charactersPage.remainingPages
+                    val pageCharacters = charactersPage.characters
 
-                currentPage++
+                    if (remainingPages == 0) {
+                        hasLoadedAllPages = true
+                    } else {
+                        pageToLoad++
+                    }
 
-                _uiState.update {
-                    it.copy(
-                        characters = it.characters.toMutableList().plus(pageCharacters),
-                        isLoading = false
-                    )
+                    _uiState.update {
+                        it.copy(
+                            characters = it.characters.toMutableList().plus(pageCharacters),
+                            isLoading = false
+                        )
+                    }
+                } else {
+                    _uiState.update { it.copy(isLoading = false) }
                 }
             }
         }

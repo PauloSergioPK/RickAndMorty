@@ -6,6 +6,7 @@ import com.psc.rickandmorty.core.common.data.model.response.LocationResponse
 import com.psc.rickandmorty.core.common.domain.model.Character
 import com.psc.rickandmorty.core.common.domain.model.CharacterGender
 import com.psc.rickandmorty.core.common.domain.model.CharacterStatus
+import com.psc.rickandmorty.core.common.domain.model.CharactersPage
 import com.psc.rickandmorty.core.common.domain.model.Episode
 import com.psc.rickandmorty.core.common.domain.model.Location
 import kotlinx.datetime.LocalDate
@@ -33,6 +34,11 @@ object Mock {
         ),
         image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
         episodes = listOf()
+    )
+    val charactersPage = CharactersPage(
+        page = 1,
+        remainingPages = 0,
+        characters = listOf(character)
     )
     val episode = Episode(
         id = 1,
