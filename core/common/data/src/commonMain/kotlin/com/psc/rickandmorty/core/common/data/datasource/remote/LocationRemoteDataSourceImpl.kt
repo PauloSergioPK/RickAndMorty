@@ -3,22 +3,23 @@ package com.psc.rickandmorty.core.common.data.datasource.remote
 import com.psc.rickandmorty.core.common.data.mapper.toLocation
 import com.psc.rickandmorty.core.common.data.service.LocationService
 import com.psc.rickandmorty.core.common.domain.model.Location
+import com.psc.rickandmorty.core.common.domain.util.Consts
 import com.psc.rickandmorty.core.common.domain.util.Consts.FIRST_PAGE
-import com.psc.rickandmorty.core.common.domain.util.Consts.PAGE_SIZE
 
 internal class LocationRemoteDataSourceImpl(
     private val locationService: LocationService
 ) : LocationRemoteDataSource {
     override suspend fun getAllLocations(): List<Location> {
         val allLocations = mutableListOf<Location>()
-        var currentPage = FIRST_PAGE
-        var currentPageItemsCount = PAGE_SIZE
 
-        while (currentPageItemsCount == PAGE_SIZE) {
-            val locationsPage = getLocationsPage(currentPage)
-            allLocations.addAll(locationsPage)
-            currentPageItemsCount = locationsPage.size
-            currentPage++
+        val firstPageResponse = locationService.getPage(FIRST_PAGE)
+        val totalPages = firstPageResponse.infoResponse.pages
+        val firstPageLocations = firstPageResponse.results.map { it.toLocation() }
+        allLocations.addAll(firstPageLocations)
+
+        for (page in Consts.SECOND_PAGE..totalPages) {
+            val episodesPage = getLocationsPage(page)
+            allLocations.addAll(episodesPage)
         }
 
         return allLocations
