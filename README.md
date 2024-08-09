@@ -26,6 +26,8 @@ Instruções passo a passo para instalação do projeto.
 - Acesse o projeto no AndroidStudio e após o projeto ser carregado, **realize o sync** e builde o aplicativo no Android ou no iOS,
   **caso não** for dado o sync e só builde, o aplicativo será buildado e uma tela em branco será exibida.
 
+**Observação**: Para rodar o aplicativo no **iOS** é necessário estar em uma máquina com o sistema operacional **MacOS**
+
 ## Decisões do Projeto
 
 ### Decisão 1: Modelo de dados
