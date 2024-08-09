@@ -47,9 +47,11 @@ android {
 dependencies {
     implementation(projects.app)
 
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.splashscreen)
+
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
-    implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
 }
