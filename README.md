@@ -1,6 +1,3 @@
-
-# RickAndMortyWiki
-
 App made with KMP and CMP to list RickAndMorty's characters and their details
 
 Home screens
